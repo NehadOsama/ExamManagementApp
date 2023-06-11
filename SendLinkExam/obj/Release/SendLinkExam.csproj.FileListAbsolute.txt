@@ -1,0 +1,12 @@
+D:\.Net Core Projects\SendLinkExam\bin\Release\SendLinkExam.exe.config
+D:\.Net Core Projects\SendLinkExam\bin\Release\SendLinkExam.exe.manifest
+D:\.Net Core Projects\SendLinkExam\bin\Release\SendLinkExam.application
+D:\.Net Core Projects\SendLinkExam\bin\Release\SendLinkExam.exe
+D:\.Net Core Projects\SendLinkExam\bin\Release\SendLinkExam.pdb
+D:\.Net Core Projects\SendLinkExam\obj\Release\SendLinkExam.csproj.AssemblyReference.cache
+D:\.Net Core Projects\SendLinkExam\obj\Release\SendLinkExam.csproj.SuggestedBindingRedirects.cache
+D:\.Net Core Projects\SendLinkExam\obj\Release\SendLinkExam.csproj.CoreCompileInputs.cache
+D:\.Net Core Projects\SendLinkExam\obj\Release\SendLinkExam.exe.manifest
+D:\.Net Core Projects\SendLinkExam\obj\Release\SendLinkExam.application
+D:\.Net Core Projects\SendLinkExam\obj\Release\SendLinkExam.exe
+D:\.Net Core Projects\SendLinkExam\obj\Release\SendLinkExam.pdb
