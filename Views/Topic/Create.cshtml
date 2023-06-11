@@ -1,0 +1,42 @@
+﻿@model CemexExamApp.ViewModel.TopicViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="color:crimson" class="text-center">Topic Management</h3>
+<h2 style="color:navy">Create New Topic</h2>
+<hr />
+<div class="row">
+    @if (ViewBag.Message != null)
+    {
+        <h3 class="alert alert-success">@ViewBag.Message</h3>
+    }
+    <div class="col-md-7">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="EnglishName" class="col-form-label fw-bold"></label>
+                <input asp-for="EnglishName" class="form-control"/>
+                <span asp-validation-for="EnglishName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArabicName" class="col-form-label fw-bold"></label>
+                <input asp-for="ArabicName" class="form-control"/>
+                <span asp-validation-for="ArabicName" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group col-form-label">
+                <input type="submit" value="Create" class="btn btn-success"  /> |
+                <a asp-action="Index" class="btn btn-info">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,142 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+
+@*@inject IHttpContextAccessor HttpContextAccessor*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Cemex Exam Management</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+    @*<link href="~/css/jquery-ui.min.css" rel="stylesheet" />*@
+    <style>
+   li form input {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+    <header id=" NavHead">
+        <nav class="navbar navbar-expand-lg navbar-toggleable-sm  fixed-top navbar-light flex-column flex-md-row bd-navbar" style="color:navy;border-bottom:solid;background-color:white;">
+           
+               
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index" >
+                <img src="~/img/layout_set_logo.gif" height="40" class="d-inline-block align-top" alt="Cemex Logo">
+               
+            </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                        <a id="HomePage" class="nav-link" style="color:navy;" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                   
+                        <li class="nav-item dropdown" style="color:navy;">
+                            <a id="=ManageSystemPage" class="nav-link  dropdown-toggle" style="color:navy;" href="#" id="NBDDSys" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Qustion Bank
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="NBDDSys">
+
+                                <a id="=UserPage" class="dropdown-item text-center" href="\Topic\Index" style="color:navy;">Topic</a>
+                                <a id="=LocationsPage" class="dropdown-item text-center" href="\Question\Index" style="color:navy;">Question</a>
+
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a id="HomePage" class="nav-link " asp-area="" asp-controller="Exam" asp-action="Index" style="color:navy;">Exam Management</a>
+                        </li>
+                    
+                   
+                    @*@if (User.IsInRole("Health & safety Member"))
+                    {*@
+                        <li class="nav-item  dropdown" style="color:navy;">
+                            <a id="=ManageSystemPage" class="nav-link  dropdown-toggle" style="color:navy;" href="#" id="NBDDSys" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Reports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="NBDDSys">
+
+                                <a id="=UserPage" class="dropdown-item text-center" asp-area="" asp-controller="Report" asp-action="ExamPerLevels" style="color:navy;">Exam Difficulty levels</a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <a id="=UserPage" class="dropdown-item text-center" asp-area="" asp-controller="Report" asp-action="QuestionsPerLevels" style="color:navy;">Questions Difficulty Levels</a>
+                                <a id="=UserPage" class="dropdown-item text-center" asp-area="" asp-controller="Report" asp-action="QuestionsPerTopic" style="color:navy;">Numbers of Questions per Topic</a>
+                                <div class="dropdown-divider"></div>
+                                <a id="=UserPage" class="dropdown-item text-center" asp-area="" asp-controller="Report" asp-action="TopicsCount" style="color:navy;">Numbers of Topics</a>
+                            </div>
+
+                        </li>
+                    @*}*@
+                    @if (User.IsInRole("Application Admin"))
+                    {
+                        <li class="nav-item  dropdown" style="color:navy;">
+                            <a id="=ManageSystemPage" class="nav-link  dropdown-toggle" style="color:navy;" href="#" id="NBDDSys" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Admin Management
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="NBDDSys">
+
+                                <a id="=UserPage" class="dropdown-item text-center" asp-area="" asp-controller="User" asp-action="Index" style="color:navy;">Users</a>
+
+                            </div>
+
+                        </li>
+                    }
+                </ul>
+                </div>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <div class="loginDisplay float-right" style="margin-left:auto; float:right;">
+                    @* <Label ID="LblWelcome">Welcome,@User.Identity.Name </Label>*@
+            
+               
+                <div  style="margin-left:10px; float:right;">
+                   @* <input type="submit" value="LogOut" class="btn btn-danger btn-sm" style="float:right;" />*@
+                    <ul class="navbar-nav flex-grow-1">
+                   <li class="nav-item dropdown">
+                            <a id="=ManageSystemPage" class="nav-link dropdown-toggle" style="color:navy;" href="#" id="NBDDSys" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Welcome, @User.Identity.Name
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="NBDDSys">
+
+                                <a id="=UserPage" class="dropdown-item text-center" style="color:navy;" asp-action="MyProfile" asp-controller="Account">My Profile</a>
+                            <div class="dropdown-divider"></div>
+                                <a id="=LocationsPage" class="dropdown-item text-center" asp-action="Logout" style="color:crimson;" asp-controller="Account">LogOut</a>
+
+                        </div>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+            }
+        </nav>
+    </header>
+
+    <div class="container" style="width: 100%; min-height: 520px; margin-top: 100px;  /*background-image: url(/Img/CemexOp25.png); background-size: 550px; background-position:bottom; background-repeat: no-repeat*/">
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-center text-center">
+        <div class="text-center">
+            <hr />
+            &copy; 2022 - DEQQA Software Solutions
+        </div>
+    </footer>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

@@ -1,0 +1,271 @@
+﻿@model CemexExamApp.ViewModel.AssessmentViewModel
+
+@{
+    ViewData["Title"] = "Assessment";
+    Layout = "~/Views/Shared/_Layout - Assessment.cshtml";
+    Layout = null;
+    int n = 0;
+    int Min = Model.exam.Duration.Duration1;
+    string RootURL = $"{HttpContextAccessor.HttpContext.Request.Scheme}://{HttpContextAccessor.HttpContext.Request.Host}{HttpContextAccessor.HttpContext.Request.PathBase}";
+}
+
+<style>
+    .ul .li {
+        margin: 30px;
+    }
+
+    .ul {
+        margin: 30px;
+    }
+</style>
+
+<div align="left">
+
+    <img src="@RootURL/Img/layout_set_logo.gif" />
+</div>
+<h1 style="color:navy; text-align:center;">Assessment Questions</h1>
+
+<p id="demo"></p>
+
+
+<div style="color:crimson; text-align:center;">Exam Duration : <span id="time">@Min:00</span> minutes</div>
+<form method="post"  asp-action="Assessment" style="text-align:center;">
+    <div class="card" style="background-image: url(@RootURL/Img/CemexOp25.png); background-size: 550px; background-position:bottom; background-repeat: no-repeat">
+
+        <ul style="list-style-type: none;">
+
+    @if (Model.exam.LanguageID == 1)
+    {
+       <input type="hidden" asp-for="ExamTakerId">
+        @for (int i = 0; i < Model.QuestionwithAns.Count(); i++)
+        {
+            n = n+1;
+            <li>
+                        <h4 style="text-align:left; margin: 30px;"> @n) &nbsp;  @Model.QuestionwithAns[i].question.EnglishName</h4>
+
+                        <input type="hidden" asp-for="@Model.takerAnswer[i].questionId" value="@Model.QuestionwithAns[i].question.ID">
+                       @* @Html.HiddenFor(x=>Model.takerAnswer[i].questionId,@Model.QuestionwithAns[i].question.ID)*@
+                        <ul style="list-style-type: none; text-align:left; margin: 30px;">
+                           
+                  
+                      <li>
+                                <label for="EnAns1@(i)">
+                                 @*   @Html.RadioButtonFor(model => Model.takerAnswer[i].AnswerNo,1) @Model.QuestionwithAns[i].QquAnswers.EnAns1<br />
+                                    @Html.HiddenFor(model => Model.takerAnswer[i].AnswerNo,1)*@
+                                @*    <input type="radio" id="EnAns1@(i)" name="Model.takerAnswer[@i].AnswerNo" value="1" /><span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns1</span>*@
+                                    @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,1,new{id="EnAns1"+i}) <span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns1</span>
+
+                                </label>
+                      </li>
+                    <li>
+                        <label for="EnAns2@(i)">
+                                    @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,2,new{id="EnAns2"+i}) <span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns2</span>
+
+                                    @*<input type="radio" id="EnAns2@(i)"  name="Model.takerAnswer[@i].AnswerNo" value="2" /><span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns2</span>*@
+                        </label>
+                    </li>
+                    <li>
+                        <label for="EnAns3@(i)">
+                                    @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,3,new{id="EnAns3"+i}) <span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns3</span>
+                                  @*  <input type="radio" id="EnAns3@(i)"  name="Model.takerAnswer[@i].AnswerNo" value="3" /><span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns3</span>*@
+                        </label>
+                    </li>
+                            @if (Model.QuestionwithAns[i].question.AnswerCountID == 4)
+                {
+                    <li>
+                            <label for="EnAns4@(i)">
+                                        @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,4,new{id="EnAns4"+i}) <span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns4</span>
+                                       @* <input type="radio" id="EnAns4@(i)"  name="Model.takerAnswer[@i].AnswerNo" value="4" /><span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns4</span>*@
+                        </label>
+                    </li>
+                }
+                            @if (Model.QuestionwithAns[i].question.AnswerCountID == 5)
+                {
+                    <li>
+                            <label for="EnAns4@(i)">
+                                        @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,4,new{id="EnAns4"+i}) <span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns4</span>
+                                        @*<input type="radio" id="EnAns4@(i)"  name="Model.takerAnswer[@i].AnswerNo" value="4" /><span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns4</span>*@
+                        </label>
+                    </li>
+                    <li>
+                            <label for="EnAns5@(i)">
+                                        @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,5,new{id="EnAns5"+i}) <span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns5</span>
+                                       @* <input type="radio" id="EnAns5@(i)"  name="Model.takerAnswer[@i].AnswerNo" value="5" /><span class="sapn">@Model.QuestionwithAns[i].QquAnswers.EnAns5</span>*@
+                        </label>
+                    </li>
+                }
+                        @*   <input type="hidden" asp-for="@Model.takerAnswer[i].AnswerNo" value="@Model.takerAnswer[i].AnswerNo">*@
+              </ul>
+          </li>
+         }
+    }
+    else
+    {
+     @for (int i = 0; i < Model.QuestionwithAns.Count(); i++)
+        {
+                    n = n + 1;
+                    <li style="margin: 30px;">
+
+                        <p style="margin: 30px;font-weight:bold;text-align:right;" dir="rtl">
+                            <span dir="ltr">&nbsp; . @n.ToString()</span>  @Model.QuestionwithAns[i].question.ArabicName
+                        </p> 
+                        <ul style="list-style-type: none; text-align:right;margin: 30px;">
+
+                            
+                <li>
+                                <label for="ArAns2" dir="rtl">
+                                    @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,1,new{id="ArAns1"+i})
+                                    <span class="sapn" style="margin-right: 10px;" dir="ltr">@Model.QuestionwithAns[i].QquAnswers.ArAns1</span>
+                                </label>
+                </li>
+                <li>
+                                <label for="ArAns2" dir="rtl">
+                                    @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,2,new{id="ArAns2"+i})
+                                    <span class="sapn" style="margin-right: 10px;" dir="ltr">@Model.QuestionwithAns[i].QquAnswers.ArAns2</span>
+                                </label>
+                </li>
+                <li>
+                                <label for="ArAns3" dir="rtl">
+                                    @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,3,new{id="ArAns3"+i})
+                                    <span class="sapn" style="margin-right: 10px;" dir="ltr">@Model.QuestionwithAns[i].QquAnswers.ArAns3</span>
+                    </label>
+                </li>
+                            @if (Model.QuestionwithAns[i].question.AnswerCountID == 4)
+                {
+                    <li>
+                                    <label for="ArAns4" dir="rtl">
+                                        @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,4,new{id="ArAns4"+i})
+                                        <span class="sapn" style="margin-right: 10px;" dir="ltr">@Model.QuestionwithAns[i].QquAnswers.ArAns4</span>
+                        </label>
+                    </li>
+                }
+                            @if (Model.QuestionwithAns[i].question.AnswerCountID == 5)
+                {
+                    <li>
+                                    <label for="ArAns4" dir="rtl">
+                                        @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,4,new{id="ArAns4"+i})
+                                        <span class="sapn" style="margin-right: 10px;" dir="ltr">@Model.QuestionwithAns[i].QquAnswers.ArAns4</span>
+                        </label>
+                    </li>
+                    <li>
+                                    <label for="ArAns5" dir="rtl">
+                                        @Html.RadioButtonFor(model => Model.takerAnswer[@i].AnswerNo,5,new{id="ArAns5"+i}) 
+                                        <span class="sapn" style="margin-right: 10px;" dir="ltr">@Model.QuestionwithAns[i].QquAnswers.ArAns5</span>
+                        </label>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    }
+
+
+
+</ul>
+    
+</div>
+
+</form>
+<script>
+   
+    //window.onbeforeunload = function () {
+    //    document.getElementById("time").innerHTML = sessionStorage.clickcount;
+    //    return "Data will be lost if you leave the page, are you sure?";
+    //};
+
+    function startTimer(duration, display) {
+        
+        var timer = duration, minutes, seconds;
+       
+        setInterval(function () {
+            //if (localStorage.getItem('savedMin_countdown') != null) 
+            //{
+            //     minutes = localStorage.getItem('savedMin_countdown');
+            //     seconds = localStorage.getItem('savedSec_countdown');
+            //}
+            //else{
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+            //}
+           
+            
+
+            
+
+            display.textContent = minutes + ":" + seconds;
+            if (--timer < 0) {
+                timer = duration;
+            }
+
+            // If the count down is over, write some text
+            //if (--timer <= 0) {
+            //   // clearInterval(x);
+            //    timer = duration;
+            //    localStorage.removeItem('savedMin_countdown');
+            //    localStorage.removeItem('savedSec_countdown');
+            //    document.getElementById("demo").innerHTML = "EXPIRED";
+            //}
+
+        }, 1000);
+        
+    }
+
+    window.onload = function () {
+        var Minutes = 60 * @Min,
+            display = document.querySelector('#time');
+        startTimer(Minutes, display);
+    };
+
+     var replaceDigits = function() {
+        var map = ["&\#1776;","&\#1777;","&\#1778;","&\#1779;","&\#1780;","&\#1781;","&\#1782;","&\#1783;","&\#1784;","&\#1785;"]
+        document.body.innerHTML = document.body.innerHTML.replace(/\d(?=[^<>]*(<|$))/g, function($0) { return map[$0]});
+    }
+   // window.onload = replaceDigits;
+
+    //window.addEventListener('beforeunload', (event) => {
+    //  //  document.getElementById("time").innerHTML = sessionStorage.clickcount;
+    //    event.returnValue = 'Are you sure you want to leave?';
+    //});
+
+</script>
+
+@*<script>
+    var time = @Min * 60; // This is the time allowed
+    var saved_countdown = localStorage.getItem('saved_countdown');
+
+    if (saved_countdown == null) {
+        // Set the time we're counting down to using the time allowed
+        var new_countdown = new Date().getTime() + (time + 2) * 1000;
+
+        time = new_countdown;
+        localStorage.setItem('saved_countdown', new_countdown);
+    } else {
+        time = saved_countdown;
+    }
+
+    // Update the count down every 1 second
+    var x = setInterval(() => {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the allowed time
+        var distance = time - now;
+
+        // Time counter
+        var counter = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("demo").innerHTML = counter + " s";
+
+        // If the count down is over, write some text
+        if (counter <= 0) {
+            clearInterval(x);
+            localStorage.removeItem('saved_countdown');
+            document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>*@

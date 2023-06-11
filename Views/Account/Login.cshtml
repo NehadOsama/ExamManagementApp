@@ -1,0 +1,42 @@
+﻿@model TheInventory.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/views/Shared/_Layout - login.cshtml";
+}
+
+
+<div class="row">
+   
+    <div class="col-md-5 offset-2">
+        <h2 style="color:navy;padding-top:30px;">Exam Management System</h2>
+        <h4 style="color:crimson;padding-top:30px;">Please use your account to log In</h4>
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="UserName" class="col-form-label fw-bold"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="col-form-label fw-bold"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group col-form-label text-center">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+            <div >
+                <a asp-action="ForgetPassword">Forget Password</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

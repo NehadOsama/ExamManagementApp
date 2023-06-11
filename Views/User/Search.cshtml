@@ -1,0 +1,53 @@
+﻿@model CemexExamApp.ViewModel.UserViewModel
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3 style="color:crimson" class="text-center">Users Management</h3>
+<h2 style ="color:navy">User Search</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewBag.Message != null)
+        {
+            <h3 class="alert alert-success">@ViewBag.Message</h3>
+        }
+    </div>
+</div>
+<div class="row">
+    
+    <div class="offset-3 col-md-7 text-center">
+        <form asp-action="Search">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="col-form-label fw-bold">First Name</label>
+                <input asp-for="FirstName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="FullName" class="col-form-label fw-bold">Last Name</label>
+                <input asp-for="FullName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="col-form-label fw-bold"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Mobile" class="col-form-label fw-bold"></label>
+                <input asp-for="Mobile" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleID" class="col-form-label fw-bold">Role</label>
+                <select asp-for="RoleID" class="form-control text-center" asp-items="ViewBag.RoleID">
+                    <option value="-1" class="text-center">-- Select Role--</option>
+                </select>
+            </div>
+            <div class="form-group form-control-lg">
+                <input type="submit" value="Search" class="btn btn-primary form-control-lg" /> |
+                <a asp-action="Index" class="btn btn-info">Back to Users List</a>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<CemexExamApp.Models.Question>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="color:crimson" class="text-center">Questions Management</h3>
+<h2 style="color:navy;" class="text-center">Search Result</h2>
+<hr />
+<p>
+    <a asp-action="Index" asp-controller="Question" class="btn btn-outline-info">All Questions List</a>
+    <a asp-action="Search" asp-controller="Question" class="btn btn-warning">Search</a>
+</p>
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewBag.Message != null)
+        {
+            <h3 class="alert alert-success">@ViewBag.Message</h3>
+        }
+    </div>
+</div>
+<table class="table text-center table-hover border-dark table-bordered align-middle table-striped table-sm">
+    <thead style="background-color:#0d345a;color:white;" class="text-center align-middle ">
+        <tr>
+            <th>
+                Question Name EN
+            </th>
+            <th>
+                Question Name AR
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                Difficulty level
+            </th>
+            <th>
+                Topic EN/AR
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnglishName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArabicName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level.Name)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Topic.EnglishName) / @Html.DisplayFor(modelItem => item.Topic.ArabicName)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-controller="QuestionAnswer" class="btn btn-primary" asp-route-id="@item.ID">Edit</a> |
+              
+
+
+                    @if (item.Active)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this Question: @item.EnglishName ?')">Delete</a>
+                    }
+                    else
+                    {
+                        <a asp-action="UnDelete" asp-route-id="@item.ID" class="btn btn-success" onclick="return confirm('Are you sure you want to Active this Question: @item.EnglishName ?')"> Activate</a>
+                    }
+            
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

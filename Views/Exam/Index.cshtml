@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CemexExamApp.Models.Exam>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:crimson" class="text-center">Exam Management</h2>
+<hr />
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Exam</a>
+    <a asp-action="Search" class="btn btn-warning">Search</a>
+</p>
+@if (Model != null && Model.Count() > 0)
+{
+<table class="table text-center table-hover table-bordered border-dark align-middle table-striped">
+    <thead style="background-color:#0d345a;color:white;">
+        <tr>
+            <th>
+                Training Name
+            </th>
+            <th>
+                Exam Validity Date / From
+            </th>
+            <th>
+                Exam Validity Date /To
+            </th>
+            <th>
+                Difficulty level
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>
+              @Html.DisplayFor(modelItem => item.training.First().Name)
+           </td>
+            <td>
+                    @{
+                        string ValiFromDateOnly = item.ValidityDateFrom.Date.ToString("dd-MM-yyyy");
+                    }
+                    @ValiFromDateOnly
+            </td>
+            <td>
+                    @{
+                        string ValiToDateOnly = item.ValidityDateTo.Date.ToString("dd-MM-yyyy");
+                    }
+                    @ValiToDateOnly
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Level.Name)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary">Edit</a> |
+                    <a asp-action="DownloadExam" asp-route-id="@item.ID" class="btn btn-info">Download Exam</a> |
+                        <a asp-action="TakersResult" asp-route-id="@item.ID" class="btn btn-warning">Takers</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}
+else
+{
+    <h3 class="text-center align-content-center alert alert-primary">No Exams Found</h3>
+}

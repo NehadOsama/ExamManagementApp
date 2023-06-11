@@ -1,0 +1,63 @@
+﻿@model IEnumerable<CemexExamApp.ViewModel.ExamViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="color:crimson" class="text-center">Exam Management</h3>
+<h2 style="color:navy;" class="text-center">Search Result</h2>
+<hr />
+<p>
+    <a asp-action="Index" class="btn btn-outline-info">All Exams list</a>
+    <a asp-action="Search" class="btn btn-warning">Search</a>
+</p>
+
+<table class="table text-center table-hover border-dark table-bordered align-middle table-striped table-sm">
+    <thead style="background-color:#0d345a;color:white;" class="text-center align-middle ">
+        <tr>
+            <th>
+                Training Name
+            </th>
+            <th>
+                Exam Validity Date / From
+            </th>
+            <th>
+                Exam Validity Date /To
+            </th>
+            <th>
+                Difficulty level
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>
+              @Html.DisplayFor(modelItem => item.TrainingName)
+           </td>
+                <td>
+                    @{
+                        string ValiFromDateOnly = item.ValidityDateFrom.Date.ToString("dd-MM-yyyy");
+                    }
+                    @ValiFromDateOnly
+                </td>
+                <td>
+                    @{
+                        string ValiToDateOnly = item.ValidityDateTo.Date.ToString("dd-MM-yyyy");
+                    }
+                    @ValiToDateOnly
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.level.Name)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ExamID" class="btn btn-primary">Edit</a> |
+                    <a asp-action="DownloadExam" asp-route-id="@item.ExamID" class="btn btn-info">Download Exam</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CemexExamApp.Models.Topic>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:crimson" class="text-center ">Topics Management</h2>
+<hr />
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Topic</a>
+</p>
+@if (ViewBag.Message != null)
+{
+            <h3 class="alert alert-success text-center">@ViewBag.Message</h3>
+}
+<div asp-validation-summary="ModelOnly" class="alert alert-danger text-center" style="list-style-type: none;"></div>
+@if (Model != null && Model.Count() > 0)
+{
+<table class="table text-center table-hover border-dark table-bordered align-middle table-striped table-sm">
+    <thead style="background-color:#0d345a;color:white;" class="text-center align-middle " width="100%">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EnglishName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArabicName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnglishName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArabicName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}
+else
+{
+    <h3 class="text-center align-content-center alert alert-primary">No Topics Found</h3>
+}

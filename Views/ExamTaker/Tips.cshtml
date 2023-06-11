@@ -1,0 +1,66 @@
+﻿@model CemexExamApp.ViewModel.StartAssessmentViewModel
+
+@{
+    ViewData["Title"] = "Confirm Assessment";
+    Layout = "~/Views/Shared/_Layout - Assessment.cshtml";
+  //  TempData.Keep();
+}
+<div align="left" style='margin-bottom:.0001pt;font-size:15px;font-family:"Calibri",sans-serif;'>
+
+    <img src="~/Img/layout_set_logo.gif" />
+</div>
+<div class="row card" style="margin-top:15px;">
+    <div style="width:100%;margin-top:15px;" class="text-center">
+        <span>
+            Hello 
+            <strong>@Model.TakerName,</strong>
+        </span>
+        <p>
+            Click
+            <span class="text-semibold"> Get Started</span>
+            button when you are ready to Start your assessment.
+        </p>
+        
+    </div>
+    <div style="width:100%" class="d-inline">
+        <h5>A few things before you start:</h5>
+        <ul>
+            <li>
+                This assessment consists of 
+                <strong>
+                    @Model.QuestionsCount
+                </strong>
+                Questions. It will take approximately
+                <strong>
+                    @Model.Duration
+                </strong>
+                minutes to complete.
+            </li>
+            <li>
+                The assessment is timed. A timer is shown per test.
+            </li>
+            <li>
+                The assessment is available once,Don't Refresh/Back to previoues page as It bad request and Don't close the page before submit your answers.
+            </li>
+            <li>
+               Please note that the deadline to submit your Answers is
+               <strong>
+                   @Model.ValidityDateTo
+               </strong>
+            </li>
+            <li>
+                Once you clicked Get Started, you will not be able to modify your answers or open it again.
+            </li>
+        </ul>
+        <p class="text-center">
+            Good luck!
+        </p>
+    </div>
+    <div class="row">
+        <input type="hidden" asp-for="ExamTakerId" />
+        <a asp-action="Assessment" asp-controller="ExamTaker" value="Start Assessment" class="btn btn-success">Get Started</a>
+    </div>
+</div>
+
+
+

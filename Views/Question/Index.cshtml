@@ -1,0 +1,145 @@
+﻿@model IEnumerable<CemexExamApp.Models.Question>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .dataTables_length,
+    .dataTables_wrapper {
+        font-size: 1.6rem;
+        select, input
+
+    {
+        background-color: #f9f9f9;
+        border: 1px solid #999;
+        border-radius: 4px;
+        height: 3rem;
+        line-height: 2;
+        font-size: 1.8rem;
+        color: #333;
+    }
+
+    .dataTables_length,
+    .dataTables_filter {
+        margin-top: 30px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        display: inline-flex;
+    }
+
+    }
+
+    // paginate
+
+    .paginate_button {
+        min-width: 4rem;
+        display: inline-block;
+        text-align: center;
+        padding: 1rem 1.6rem;
+        margin-top: -1rem;
+        border: 2px solid lightblue;
+        &:not(.previous)
+
+    {
+        border-left: none;
+    }
+
+    &.previous {
+        border-radius: 8px 0 0 8px;
+        min-width: 7rem;
+    }
+
+    &.next {
+        border-radius: 0 8px 8px 0;
+        min-width: 7rem;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: #eee;
+        text-decoration: none;
+    }
+
+    }
+</style>
+<h2 style="color:crimson" class="text-center">Questions Management</h2>
+<hr />
+<p>
+    <a asp-action="Create" asp-controller="QuestionAnswer" class="btn btn-success">Create New Question</a>
+    <a asp-action="Search" asp-controller="Question" class="btn btn-warning">Search</a>
+</p>
+@if (Model != null && Model.Count() > 0)
+{
+    <table id="example" class="table text-center table-hover border-dark table-bordered align-middle table-striped table-sm" cellspacing="0">
+        <thead style="background-color:#0d345a;color:white;" class="text-center align-middle ">
+            <tr>
+                <th>
+                    Question Name EN
+                </th>
+                <th>
+                    Question Name AR
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                <th>
+                    Difficulty level
+                </th>
+                <th>
+                    Topic EN/AR
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EnglishName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArabicName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Level.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Topic.EnglishName) <br/> @Html.DisplayFor(modelItem => item.Topic.ArabicName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-controller="QuestionAnswer" class="btn btn-primary" asp-route-id="@item.ID">Edit</a> |
+                        @* <a asp-action="Details" asp-route-id="@item.ID">Details</a> |*@
+
+
+
+                        @if (item.Active)
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger" onclick="return confirm('Are you sure you want to Delete this Question: @item.EnglishName ?')">Delete</a>
+                        }
+                        else
+                        {
+                            <a asp-action="UnDelete" asp-route-id="@item.ID" class="btn btn-success" onclick="return confirm('Are you sure you want to Active this Question: @item.EnglishName ?')"> Activate</a>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else{
+    <h3 class="text-center align-content-center alert alert-info">No Questions Found</h3>
+}
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#example").DataTable();
+    });
+
+</script>
+}

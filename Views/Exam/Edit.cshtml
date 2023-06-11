@@ -1,0 +1,193 @@
+﻿@model CemexExamApp.ViewModel.ExamViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="color:crimson" class="text-center">Exam Management</h3>
+<h2 style ="color:navy">Edit Exam</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewBag.Message != null)
+        {
+            <h3 class="alert alert-success">@ViewBag.Message</h3>
+        }
+    </div>
+</div>
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="TrainingName" class="col-form-label fw-bold"></label>
+                <input asp-for="TrainingName" class="form-control" />
+                <span asp-validation-for="TrainingName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingFromDate" class="col-form-label fw-bold"></label>
+                <input asp-for="TrainingFromDate" type="date" id="txtTrainFromDate" class="form-control txtDate" />
+                <span asp-validation-for="TrainingFromDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingToDate" class="col-form-label fw-bold"></label>
+                <input asp-for="TrainingToDate" type="date" id="txtTrainToDate" class="form-control txtDate" />
+                <span asp-validation-for="TrainingToDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="DurationID" class="col-form-label fw-bold"></label>
+                <select asp-for="DurationID" class="form-control text-center" asp-items="ViewBag.DurationID">
+                </select>
+                <span asp-validation-for="DurationID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValidityDateFrom" class="col-form-label fw-bold"></label>
+                <input asp-for="ValidityDateFrom" type="date" id="txtValFromDate" class="form-control txtDate" />
+                <span asp-validation-for="ValidityDateFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValidityDateTo" class="col-form-label fw-bold"></label>
+                <input asp-for="ValidityDateTo" type="date" id="txtValToDate" class="form-control txtDate" />
+                <span asp-validation-for="ValidityDateTo" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label asp-for="NumberOfQuestions" class="col-form-label fw-bold"></label>
+                <select asp-for="NumberOfQuestions" id="NumberOfQuestions" class="form-control text-center">
+
+                    <option value="2" class="text-center">2</option>
+                    <option value="4" class="text-center">4</option>
+                    <option value="8" class="text-center">8</option>
+                    <option value="10" class="text-center">10</option>
+                    <option value="16" class="text-center">16</option>
+                    <option value="20" class="text-center">20</option>
+                    <option value="24" class="text-center">24</option>
+                </select>
+                <span asp-validation-for="NumberOfQuestions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfTopics" class="col-form-label fw-bold"></label>
+                <select asp-for="NumberOfTopics" class="form-control text-center">
+
+                    <option value="1" class="text-center">1</option>
+                    <option value="2" class="text-center">2</option>
+                    <option value="4" class="text-center">4</option>
+                    <option value="6" class="text-center">6</option>
+                    <option value="10" class="text-center">10</option>
+                    <option value="12" class="text-center">12</option>
+                </select>
+                <span asp-validation-for="NumberOfTopics" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfQuestionsPerTopic" class="col-form-label fw-bold"></label>
+                <select asp-for="NumberOfQuestionsPerTopic" id="NumberOfQuestionsPerTopic" class="form-control text-center">
+
+                    <option value="2" class="text-center">2</option>
+                    <option value="4" class="text-center">4</option>
+                    <option value="6" class="text-center">6</option>
+                    <option value="10" class="text-center">10</option>
+                    <option value="12" class="text-center">12</option>
+                </select>
+                <span asp-validation-for="NumberOfQuestionsPerTopic" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="LanguageID" class="col-form-label fw-bold"></label>
+                <select asp-for="LanguageID" class="form-control text-center" asp-items="ViewBag.LanguageID">
+                </select>
+                <span asp-validation-for="LanguageID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LevelID" class="col-form-label fw-bold"></label>
+                <select asp-for="LevelID" class="form-control text-center" asp-items="ViewBag.LevelID">
+                </select>
+                <span asp-validation-for="LevelID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BenchmarkID" class="col-form-label fw-bold"></label>
+                <select asp-for="BenchmarkID" class="form-control text-center" asp-items="ViewBag.BenchmarkID">
+                </select>
+                <span asp-validation-for="BenchmarkID" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label asp-for="TopicsList" class="col-form-label fw-bold"></label>
+            <select asp-for="TopicsList" class="form-control" asp-items="ViewBag.TopicID" multiple>
+            </select>
+            <span asp-validation-for="TopicsList" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label col-form-label">
+                <input class="form-check-input" id="myCheck" type="checkbox" asp-for="NeedUpdateSheet" /> Need to update Exam Takers list
+            </label>
+        </div>
+        <div class="form-group" id="btnNeedTakerUpdate" hidden="hidden">
+            <label asp-for="TakersSheet" class="col-form-label fw-bold">Add Exam Takers</label>
+            <input type="file" name="TakersSheet" asp-for="TakersSheet" class="form-control" />
+            <span asp-validation-for="TakersSheet" class="text-danger"></span>
+        </div>
+        <div class="form-group" style="float:right;" id="btnNeedTakerUpdate2" hidden="hidden">
+            <div class="offset-md-1">
+                <a href="~/uploads/Template/ExamTakers.xlsx" title="Download Excel Sheet Template" target="_blank">Download Template for Add Exam Takers</a>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <input type="hidden" asp-for="ExamID" />
+            <input type="submit" value="Edit" class="btn btn-success" />
+        </div>
+    </div>
+</form>
+
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-info">Back to Exam List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        var today = new Date().toISOString().split('T')[0];
+        console.log(today);
+   $('#txtTrainFromDate').prop('min', today);
+   $('#txtTrainToDate').prop('min', today);
+   $('#txtValFromDate').prop('min', today);
+   $('#txtValToDate').prop('min', today);
+
+    
+
+        $("#myCheck").click(function (e) {
+           
+                if ($("#myCheck").is(":checked")) {
+                    console.log("checked");
+                    $("#btnNeedTakerUpdate").prop('hidden', false);
+                    $("#btnNeedTakerUpdate2").prop('hidden', false);
+                }
+                else {
+                    console.log("unchecked");
+                    $("#btnNeedTakerUpdate").prop('hidden', true);
+                    $("#btnNeedTakerUpdate2").prop('hidden', true);
+                }
+            
+
+        });
+
+        //$("#NumberOfQuestionsPerTopic").change(function () {
+        //    var NumberOfQuestionsPerTopic = $(this).val();
+        //    console.log(NumberOfQuestionsPerTopic);
+        //    if (NumberOfQuestionsPerTopic < )
+        //});
+
+
+    </script>
+}

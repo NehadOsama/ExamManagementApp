@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CemexExamApp.Models.ExamTaker>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:crimson" class="text-center">Exam Management</h2>
+<h3 style ="color:navy">Exam Takers</h3>
+<hr />
+<h5 class="text-center">@ViewBag.TraningName</h5>
+<br />
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table text-center table-hover table-bordered border-dark align-middle table-striped">
+        <thead style="background-color:#0d345a;color:white;">
+            <tr>
+                <th>
+                    UserName
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Status
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMail)
+                    </td>
+                    <td>
+                        @if(item.OpenedBefore)
+                        {
+                            if (item.FinalResult.HasValue && item.FinalResult.Value)
+                            {
+                                <label class="alert alert-success">Passed</label>
+                            }
+                            else
+                            {
+                                <label class="alert alert-danger">Failed</label>
+                            }
+                        }
+                        else
+                        {
+                        <label class="alert alert-info">Not Examed yet</label>
+                            
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3 class="text-center align-content-center alert alert-primary">No Takers Found</h3>
+}

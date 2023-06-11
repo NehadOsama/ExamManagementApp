@@ -1,0 +1,36 @@
+﻿@model CemexExamApp.ViewModel.StartAssessmentViewModel
+
+@{
+    ViewData["Title"] = "Confirm Assessment";
+    Layout = "~/Views/Shared/_Layout - Assessment.cshtml";
+}
+<div align="left" style='margin-bottom:.0001pt;font-size:15px;font-family:"Calibri",sans-serif;'>
+
+    <img src="~/Img/layout_set_logo.gif" />
+</div>
+<h1 style="color:navy" class="text-center">Cemex Assessment</h1>
+
+<h4 style="color:crimson" class="text-center">Enter your Email</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form asp-action="ConfirmEmail">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input  type="hidden" asp-for="ExamId"/>
+
+            <div class="form-group text-center">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group text-center" style="margin-top:10px;">
+                <input type="submit" value="Confirm" asp-action="ConfirmEmail" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,223 @@
+﻿@model CemexExamApp.ViewModel.QuestionAnswerViewModel
+
+@{
+    ViewData["Title"] = "New Question";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+<h3 style="color:crimson" class="text-center">Questions Management</h3>
+<h2 style="color:navy">Create New Question</h2>
+
+<hr />
+<form asp-action="Create">
+      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+       <div class="row">
+        <div class="col-md-12">
+            @if (ViewBag.Message != null)
+            {
+                <h3 class="alert alert-success">@ViewBag.Message</h3>
+            }
+        </div>
+    </div>
+         @*   <input asp-for="ID" type="hidden" />*@
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label asp-for="EnglishName" class="col-form-label fw-bold">Question Name EN</label>
+           <textarea asp-for="EnglishName" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="EnglishName" class="text-danger"></span>
+            </div>
+           
+         
+            
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="EnAns1" class="col-form-label fw-bold">Answer 1 EN</label>
+              @*  <input asp-for="EnAns1" class="form-control" />*@
+                <textarea asp-for="EnAns1" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="EnAns1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            
+            <div class="form-group">
+                <label asp-for="ArAns1" class="col-form-label fw-bold">Answer 1 AR</label>
+           @*     <input asp-for="ArAns1" class="form-control" />*@
+                <textarea asp-for="ArAns1" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="ArAns1" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ArabicName" class="col-form-label fw-bold">Question Name AR</label>
+             @*   <input asp-for="ArabicName" class="form-control" />*@
+                <textarea asp-for="ArabicName" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="ArabicName" class="text-danger"></span>
+            </div>
+            
+        </div>
+        <div class="col-md-4">
+            
+            <div class="form-group">
+                <label asp-for="EnAns2" class="col-form-label fw-bold">Answer 2 EN</label>
+                @*<input asp-for="EnAns2" class="form-control" />*@
+                <textarea asp-for="EnAns2" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="EnAns2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+             <div class="form-group">
+                <label asp-for="ArAns2" class="col-form-label fw-bold">Answer 2 AR</label>
+                @*<input asp-for="ArAns2" class="form-control" />*@
+                <textarea asp-for="ArAns2" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="ArAns2" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+     <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label asp-for="TopicID" class="col-form-label fw-bold">Topic EN/AR</label>
+                <select asp-for="TopicID" class="form-control text-center" asp-items="ViewBag.TopicID"></select>
+            </div>
+            
+        </div>
+        <div class="col-md-4">
+             <div class="form-group">
+                <label asp-for="EnAns3" class="col-form-label fw-bold">Answer 3 EN</label>
+               @* <input asp-for="EnAns3" class="form-control" />*@
+                <textarea asp-for="EnAns3" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="EnAns3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            
+            <div class="form-group">
+                <label asp-for="ArAns3" class="col-form-label fw-bold">Answer 3 AR</label>
+                @*<input asp-for="ArAns3" class="form-control" />*@
+                <textarea asp-for="ArAns3" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="ArAns3" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+           
+            <div class="form-group">
+                <label asp-for="LevelID" class="col-form-label fw-bold">Difficulty level</label>
+                <select asp-for="LevelID" class="form-control text-center" asp-items="ViewBag.LevelID"></select>
+            </div>
+            
+
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="EnAns4" class="col-form-label fw-bold">Answer 4 EN</label>
+               @* <input asp-for="EnAns4" class="form-control" />*@
+                <textarea asp-for="EnAns4" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="EnAns4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ArAns4" class="col-form-label fw-bold">Answer 4 AR</label>
+         @*       <input asp-for="ArAns4" class="form-control" />*@
+                <textarea asp-for="ArAns4" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="ArAns4" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+     <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label asp-for="AnswerCountID" class="col-form-label fw-bold">Number of Answers</label>
+                <select asp-for="AnswerCountID" id="AnswerCountID" class="form-control text-center" asp-items="ViewBag.AnswerCountID"></select>
+            </div>
+            
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="EnAns5" class="col-form-label fw-bold">Answer 5 EN</label>
+               @* <input asp-for="EnAns5" class="form-control" />*@
+                <textarea asp-for="EnAns5" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="EnAns5" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ArAns5" class="col-form-label fw-bold">Answer 5 AR</label>
+               @* <input asp-for="ArAns5" class="form-control" />*@
+                <textarea asp-for="ArAns5" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="ArAns5" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+           
+            <div class="form-group">
+                <label asp-for="CorrectAnswerID" class="col-form-label fw-bold">Correct Answer No</label>
+                <select asp-for="CorrectAnswerID" id="CorrectAnswerID" class="form-control text-center" asp-items="ViewBag.CorrectAnswerID"></select>
+            </div>
+           
+
+        </div>
+        <div class="col-md-4">
+            <div class="form-group form-check">
+                <label class="form-check-label col-form-label fw-bold">
+                    <input type="checkbox" checked asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                </label>
+            </div>
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            </div>
+        <div class="col-md-4">
+            <div class="form-group col-form-label">
+                <input type="submit" value="Create" class="btn btn-success" /> |
+                <a asp-action="Index" asp-controller="Question" class="btn btn-outline-info">Back to Question List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+    <script>
+
+        $("#AnswerCountID").change(function () {
+            var AnswerCountID = $(this).val();
+            console.log(AnswerCountID);
+            $("#CorrectAnswerID").empty();
+
+            $.getJSON('/QuestionAnswer/RightAnswerList?AnswerCountID=' + AnswerCountID, function (data) {
+                console.log(data);
+                $.each(data, function (i, item) {
+                    $("#CorrectAnswerID").append(`<option value="${item.text}">${item.value}</option>`);
+                });
+            });
+        });
+
+    </script>
+
+    }

@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cemex Exam Management</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CemexExamApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+@*        <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-white fixed-top flex-column flex-md-row bd-navbar">
+*@           
+        <nav class="navbar navbar-expand-lg navbar-toggleable-sm  fixed-top navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #3fa2ef">
+
+<div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/layout_set_logo.gif" height="40" class="d-inline-block align-top" alt="Cemex" />
+                    Cemex Exam Management</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a id="HomePage" class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        
+                            <li class="nav-item dropdown">
+                                <a id="=ManageSystemPage" class="nav-link text-light dropdown-toggle" href="#" id="NBDDSys" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage System
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="NBDDSys">
+                                    
+                                        <a id="=UserPage" class="dropdown-item" href="\User\Index">Users</a>
+                                    
+                                   
+                                        <a id="=LocationsPage" class="dropdown-item" href="\Locations\Index">Locations</a>
+                                    
+                                </div>
+                            </li>
+                        
+                        @if (User.HasClaim("StockIn", "true") || User.HasClaim("Assign", "true") || User.HasClaim("Return", "true"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a id="=AddItemPage" class="nav-link text-light dropdown-toggle" href="#" id="NBDDItem" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Token
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="NBDDItem">
+                                    @if (User.HasClaim("StockIn", "true"))
+                                    {
+                                        <a id="=StockInPage" class="dropdown-item" href="\StockIn\Add">Add New Item</a>
+                                    }
+                                    @if (User.HasClaim("Assign", "true"))
+                                    {
+                                        <a id="=AssignPage" class="dropdown-item" href="\Assign\Assign">Single Assign</a>
+                                        <a id="=AddItemPage" class="dropdown-item" href="\Assign\Form">Form</a>
+                                    }
+                                    @if (User.HasClaim("Return", "true"))
+                                    {
+                                        <a id="=ReturnPage" class="dropdown-item" href="\Return\Return">Return</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+                        @if (User.HasClaim("Send", "true") || User.HasClaim("Receive", "true") ||
+                        User.HasClaim("SendShipment", "true") || User.HasClaim("ReceiveShipment", "true"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a id="=TransferPage" class="nav-link text-light dropdown-toggle" href="#" id="NBDDTransfer" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Transfer
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="NBDDTransfer">
+                                    @if (User.HasClaim("Send", "true"))
+                                    {
+                                        <a id="=SendPage" class="dropdown-item" href="\Transfer\Send">Send</a>
+                                    }
+                                    @if (User.HasClaim("Receive", "true"))
+                                    {
+                                        <a id="=ReceiverPage" class="dropdown-item" href="\Transfer\Receive">Receive</a>
+                                    }
+                                    @if (User.HasClaim("SendShipment", "true"))
+                                    {
+                                        <div class="dropdown-divider"></div>
+
+                                        <a id="=SendPage" class="dropdown-item" href="\Shipment\SendShip">Send Contract Shipment</a>
+                                    }
+                                    @if (User.HasClaim("ReceiveShipment", "true"))
+                                    {
+                                        <a id="=SendPage" class="dropdown-item" href="\Shipment\ReceiveShip">Receive Contract Shipment</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+                        @if (User.HasClaim("Trace", "true") || User.HasClaim("AgentLocation", "true") || User.HasClaim("AdvancedSearch", "true")
+                        || User.HasClaim("Search", "true") || User.HasClaim("PendingTransfer", "true") || User.HasClaim("CheckBalance", "true")
+                        || User.HasClaim("ClosingDayReport", "true"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="NBDDReport" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Reports
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="NBDDReport">
+                                    @if (User.HasClaim("Trace", "true"))
+                                    {
+                                        <a class="dropdown-item" href="\Report\Trace">Trace Token/ApplicationNo</a>
+                                    }
+                                    @if (User.HasClaim("AgentLocation", "true"))
+                                    {
+                                        <a class="dropdown-item" href="\Report\AgentLocation">Agent Location Report</a>
+                                    }
+                                    @if (User.HasClaim("AdvancedSearch", "true"))
+                                    {
+                                        <a class="dropdown-item" href="\Report\AdvancedSearch">Advanced Search</a>
+                                    }
+                                    @if (User.HasClaim("Search", "true"))
+                                    {
+                                        <a class="dropdown-item" href="\Report\Search">Search</a>
+                                    }
+                                    @if (User.HasClaim("PendingTransfer", "true"))
+                                    {
+                                        <a class="dropdown-item" href="\Report\PendingTransfer">Pending Transfer</a>
+                                    }
+                                    @if (User.HasClaim("CheckBalance", "true"))
+                                    {
+                                        <a class="dropdown-item" href="\Report\CheckBalance">Check Balance</a>
+                                    }
+                                    @if (User.HasClaim("ClosingDayReport", "true"))
+                                    {
+                                        <a class="dropdown-item" href="\Report\DailyClose">Closing Day Report</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+             @*   <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                       
+
+                        <li class="nav-item dropdown">
+                        
+                            <a id="=ManageSystemPage" class="nav-link text-dark dropdown-toggle" href="#" id="NBDDQuestionBank" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Question Bank
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="NBDDQuestionBank">
+                                <a id="=TopicPage" class="dropdown-item" href="\Topic\Index">Topic Management</a>
+                                <a id="=QuestionPage" class="dropdown-item" href="\Question\Index">Question Management</a>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>*@
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - CemexExamApp 
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

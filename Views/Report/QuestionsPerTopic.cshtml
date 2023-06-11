@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CemexExamApp.ViewModel.VMReport.GetNumberOfQuestionPerTopic_ViewModel>
+
+@{
+    ViewData["Title"] = "Questions Number Per Topic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3 style="color:crimson" class="text-center">Question Report</h3>
+<h2 style="color:navy">Question Number Per Topic</h2>
+<hr />
+@if (Model != null && Model.Count() > 0)
+{
+<table class="table text-md-center table-bordered table-hover table-striped table-responsive-sm align-middle table-sm">
+    <thead style="background-color:lightsteelblue;font-weight:bold;">
+        <tr>
+            <th>
+                Topic Name
+            </th>
+            <th>
+                Count of Questions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Topic.EnglishName)
+                    <br>
+                    @Html.DisplayFor(modelItem => item.Topic.ArabicName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <h3 class="text-center align-content-center alert alert-primary">No Data Found</h3>
+}

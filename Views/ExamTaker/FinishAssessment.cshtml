@@ -1,0 +1,33 @@
+﻿
+
+@{
+    ViewData["Title"] = "Assessment Finished";
+    Layout = "~/Views/Shared/_Layout - Assessment.cshtml";
+
+    var Result = TempData["Result"] as string;
+    TempData.Keep();
+}
+<div align="left" style='margin-bottom:.0001pt;font-size:15px;font-family:"Calibri",sans-serif;'>
+
+    <img src="~/Img/layout_set_logo.gif" />
+</div>
+<h1 style="color:navy;margin-top:15px;" class="text-center">Cemex Assessment Result</h1>
+<div class="row" >
+    @if (Result.ToLower() == "true")
+    {
+        <h3 class="alert alert-success text-center" style="margin-top:30px;">
+            You Passed this Assessment Successfully !
+        </h3>
+    }
+    else{
+        <h3 class="alert alert-danger text-center" style="margin-top:30px;">
+            Sorry, You Failed.
+        </h3>
+    }
+   
+   @* <div class="offset-5">
+        <a class="btn btn-danger" asp-action="ShowResult" asp-route-ExamTakerId="@Model.ID">
+            Show Result
+        </a>
+    </div>*@
+    </div>

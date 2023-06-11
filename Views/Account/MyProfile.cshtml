@@ -1,0 +1,77 @@
+﻿@model CemexExamApp.Models.SecUser
+
+@{
+    ViewData["Title"] = "MyProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 style="color:navy">Cemex Exam Management</h1>
+
+<h2 style="color:crimson" class="text-center">My Profile</h2>
+<hr />
+
+<div class="row">
+    
+    <dl class="row">
+        
+            <div class="col-sm-5 d-inline">
+                @if (!string.IsNullOrEmpty(Model.ProfilePic))
+        {
+                <img class="card" src="/ProfilePic/@Model.ProfilePic" width="300px;" height="300px;" asp-append-version="true" />
+            }
+            </div>
+        
+        <div class="col-sm-5 row">
+        <dt class = "col-sm-5">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class = "col-sm-5">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+            <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+            <dd class="col-sm-5">
+                @Html.DisplayFor(model => model.LastName)
+        </dd>
+            <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+            <dd class="col-sm-5">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+            <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+            <dd class="col-sm-5">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+            <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+            <dd class="col-sm-5">
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+            <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.AD)
+        </dt>
+            <dd class="col-sm-5">
+            @Html.DisplayFor(model => model.AD)
+        </dd>
+            <dt class="col-sm-5">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+            <dd class="col-sm-5">
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+        </div>
+        @if (Model.AD)
+        {
+        <div class="col-sm-2 d-inline">
+            <a asp-action="ChangePassword" class="btn btn-danger text-center">Change Password</a>
+        </div>
+        }
+    </dl>
+
+</div>
+
+

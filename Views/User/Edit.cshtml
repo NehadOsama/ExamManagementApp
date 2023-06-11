@@ -1,0 +1,127 @@
+﻿@model CemexExamApp.ViewModel.UserViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+}
+
+<h3 style="color:crimson" class="text-center">User Management</h3>
+<h2 style="color:navy">Edit User</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewBag.Message != null)
+        {
+            <h3 class="alert alert-success">@ViewBag.Message</h3>
+        }
+    </div>
+</div>
+<form asp-action="Edit" enctype="multipart/form-data">
+<div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-6">
+            <input type="hidden" asp-for="ID" />
+          
+            <div class="form-group">
+                <label asp-for="FirstName" class="col-form-label fw-bold">First Name</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FullName" class="col-form-label fw-bold">Last Name</label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="Mobile" class="col-form-label fw-bold"></label>
+                <input asp-for="Mobile" class="form-control" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group form-check">
+                <label class="form-check-label col-form-label fw-bold">
+                    <input class="form-check-input" type="checkbox" checked asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label col-form-label fw-bold">
+                    <input class="form-check-input" id="myCheck" type="checkbox" asp-for="AD" /> @Html.DisplayNameFor(model => model.AD)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfilePic" class="col-form-label fw-bold">Profile Picture</label>
+                <input asp-for="ProfilePic" type="file" name="ProfilePic" class="form-control" />
+                <span asp-validation-for="ProfilePic" class="text-danger"></span>
+            </div>
+            <div class="form-group form-control-lg">
+                <input type="submit" value="Edit" class="btn btn-success form-control-lg text-center" />
+            </div>
+            <div>
+                <a asp-action="Index" class="btn btn-outline-info">Back to Users List</a>
+            </div>
+    </div>
+    <div class="col-md-6">
+
+          
+                <div class="form-group">
+                    <label asp-for="Username" class="col-form-label fw-bold">Username</label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="Email" class="col-form-label fw-bold"></label>
+                    <input asp-for="Email" type="email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <label asp-for="RoleID" class="col-form-label fw-bold"> Role</label>
+                    <select asp-for="RoleID" class="form-control" asp-items="ViewBag.RoleID"></select>
+                </div>
+            @if(!string.IsNullOrEmpty(Model.SavedPicPath))
+            {
+                <div class="d-inline">
+                    <img class="card" src="/ProfilePic/@Model.SavedPicPath" width="250px;" height="250px;" asp-append-version="true" />
+            </div>
+            }
+            <div id="btnAD" hidden="hidden" style="margin-top:20px;">
+                <input type="submit" asp-action="GetUserAD" formnovalidate="formnovalidate" class="cancel btn btn-warning form-control-lg" value="Get Active Directory Data" />
+
+            </div>
+            
+        </div>
+</div>
+
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+<script type="text/javascript">
+
+
+            $("#myCheck").click(function (e) {
+                if ($("#myCheck").attr("readonly") !== undefined) {
+                    console.log("undefined");
+                    e.preventDefault();
+                    $(this).css('background-color', 'Gray');
+                }
+                else { //attribute is not exist and value for this attribute will be undefined
+                    if ($("#myCheck").is(":checked")) {
+                        console.log("checked");
+                    $("#btnAD").prop('hidden', false);
+                    }
+                    else {
+                        console.log("unchecked");
+                    $("#btnAD").prop('hidden', true);
+                    }
+                }
+
+            });
+
+            </script>
+}
+
